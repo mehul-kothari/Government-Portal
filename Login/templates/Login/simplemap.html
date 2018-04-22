@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #map {
+            height: 50%;
+        }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script>
+    var map;
+    var restaurants = [];
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 19.1237519, lng: 72.8339179},
+            zoom: 12,
+            mapTypeControl: false
+        });
+        var bounds = new google.maps.LatLngBounds();
+        var infoWindow = new google.maps.InfoWindow();
+         var myLatLng = {lat: 19.1237519, lng: 72.8339179};
+
+ var marker;
+
+function placeMarker(location) {
+  if ( marker ) {
+    marker.setPosition(location);
+    console.log("if"+marker.getPosition().lat());
+  } else {
+    marker = new google.maps.Marker({
+      position: location,
+      map: map
+    });
+    $('#long').val(marker.getPosition().lng());
+    $('#lat').val(marker.getPosition().lat());
+    var lng = marker.getPosition().long();
+    var lat = marker.getPosition().lat();
+  }
+}
+
+google.maps.event.addListener(map, 'click', function(event) {
+  placeMarker(event.latLng);
+});
+
+        $.getJSON('restaurants.json',
+                function (response) {
+                    for (var r of response['restaurants']) {
+                        restaurants.push({
+                            name: r.restaurant.name,
+                            thumb: r.restaurant.thumb,
+                            locality: r.restaurant.location.locality,
+                            rating: r.restaurant.user_rating.aggregate_rating,
+                            position: {
+                                lat: +r.restaurant.location.latitude,
+                                lng: +r.restaurant.location.longitude
+                            }
+                        });
+                    }
+                    for (var i = 0; i < restaurants.length; i++) {
+                        var marker = new google.maps.Marker({
+                            position: restaurants[i].position,
+                            map: map,
+                            title: restaurants[i].name,
+                            icon: 'icon.svg',
+                            animation: google.maps.Animation.DROP,
+                            id: i
+                        });
+                        const res = restaurants[i];
+                        bounds.extend(marker.position);
+                        marker.addListener('click', function () {
+                        alert("clikced bro");
+                            addInfoWindow(this, infoWindow, res);
+                        });
+                        marker.addListener('click', function () {
+                            infoWindow.close();
+
+                        });
+                    }
+                    map.fitBounds(bounds);
+                });
+        map.addListener('click', function () {
+            infoWindow.close();
+        });
+    }
+    var addInfoWindow = function (marker, infoWindow, restaurant) {
+        infoWindow.marker = marker;
+        infoWindow.setContent(
+                '<div>' +
+                '<img style="width: 80px; height: 80px; position: relative; float: left;" src="' + restaurant.thumb + '">' +
+                '<h4 style="position: relative; float: left; margin-left: 8px">' + restaurant.name + '' +
+                '<small><br>' + restaurant.locality + '</small></h4>' +
+                '</div>'
+        );
+        infoWindow.open(map, marker);
+        infoWindow.addListener('closeclick', function () {
+            infoWindow.marker = null;
+        });
+    };
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8g6dEvdguylYmEBQCFT3tuaqP5b4t-QU&callback=initMap"
+        async defer></script>
+<form action="" method="post">
+    <input type="text" value="" id="long">
+    <input type="text" value="" id="lat">
+    <input type="submit" value="submit">
+</form>
+</body>
+</html>

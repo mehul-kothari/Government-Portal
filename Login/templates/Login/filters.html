@@ -1,0 +1,739 @@
+ {% load staticfiles %}
+ {% with 1 as j %}
+
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Filters</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'Login/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Material Design Bootstrap -->
+    <link href="{% static 'Login/mdb.min.css' %}" rel="stylesheet">
+
+    <!-- Your custom styles (optional) -->
+    <link href="{% static 'Login/bootstrap-extensions.css' %}" rel="stylesheet">
+    <!--<script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>-->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="{% static 'Login/tether.min.js' %}"></script>
+
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="{% static 'Login/bootstrap.min.js' %}"></script>
+
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="{% static 'Login/mdb.min.js' %}"></script>
+<style>
+    #noti_Container {
+        position:relative;
+    }
+
+    /* A CIRCLE LIKE BUTTON IN THE TOP MENU. */
+  /*  #noti_Button {
+        width:22px;
+        height:22px;
+        line-height:22px;
+        border-radius:50%;
+        -moz-border-radius:50%;
+        -webkit-border-radius:50%;
+        background:#FFF;
+        margin:-3px 10px 0 10px;
+        cursor:pointer;
+    }*/
+
+    /* THE POPULAR RED NOTIFICATIONS COUNTER. */
+    #noti_Counter {
+        display:block;
+        position:absolute;
+        background:#E1141E;
+        color:#FFF;
+        font-size:12px;
+        font-weight:normal;
+        padding:1px 3px;
+        margin:-8px 0 0 25px;
+        border-radius:2px;
+        -moz-border-radius:2px;
+        -webkit-border-radius:2px;
+        z-index:1;
+    }
+
+    /* THE NOTIFICAIONS WINDOW. THIS REMAINS HIDDEN WHEN THE PAGE LOADS. */
+    #notifications {
+        display:none;
+        width:300px;
+        position:absolute;
+        top:30px;
+        left:0;
+        background:#FFF;
+        border:solid 1px rgba(100, 100, 100, .20);
+        -webkit-box-shadow:0 3px 8px rgba(0, 0, 0, .20);
+        z-index: 0;
+    }
+    /* AN ARROW LIKE STRUCTURE JUST OVER THE NOTIFICATIONS WINDOW */
+    #notifications:before {
+        content: '';
+        display:block;
+        width:0;
+        height:0;
+        color:transparent;
+        border:10px solid #CCC;
+        border-color:transparent transparent #FFF;
+        margin-top:-20px;
+        margin-left:10px;
+    }
+
+
+
+    .seeAll {
+        background:#F6F7F8;
+        padding:8px;
+        font-size:12px;
+        font-weight:bold;
+        border-top:solid 1px rgba(100, 100, 100, .30);
+        text-align:center;
+    }
+    .seeAll a {
+        color:#3b5998;
+    }
+    .seeAll a:hover {
+        background:#F6F7F8;
+        color:#3b5998;
+        text-decoration:underline;
+    }
+     #notif{
+            width: 400px !important;
+        }
+         #hello {
+   padding-right: 150px;
+}
+#nav{list-style:none;margin: 50px 50px 50px 150px;padding: 0px;}
+#nav li {
+float: left;
+margin-right: 20px;
+font-size: 14px;
+font-weight:bold;
+}
+#nav li a{color:#333333;text-decoration:none}
+#nav li a:hover{color:#006699;text-decoration:none}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- Start your project here-->
+
+
+
+
+<head>
+<!--Navbar-->
+<nav class="navbar navbar-fixed-top scrolling-navbar navbar-dark bg-primary navbar navbar-light grey ">
+
+        <div class="container">
+
+            <!--Navbar Brand-->
+            <a class="navbar-brand" href="#">GovForum</a>
+
+            <!--Links-->
+            <ul class="nav navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/login/home/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <div class="dropdown">
+                        <a href="#">
+                            <span class="glyphicon glyphicon-user"></span>
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a href="#">Logout</a></li>
+                            <li><a href="#">Edit Profile</a></li>
+                            <li><a href="#">Change Password</a></li>
+
+                        </ul>
+                    </div>
+
+                </li>
+                <!--<li class="nav-item">
+                    <a class="nav-link" href="#">Forum</a>
+                </li>-->
+				<li class="nav-item btn-group">
+                    <a class="nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Forum</a>
+                    <div class="dropdown-menu " aria-labelledby="dropdownMenu1">
+                        <a class="dropdown-item" href="/login/home/Railway/">Railways</a>
+                        <a class="dropdown-item" href="/login/home/Eve-teasing/">Eve-teasing</a>
+                        <a class="dropdown-item" href="/login/home/Hospitals/">Hospitals</a>
+						<a class="dropdown-item" href="/login/home/Corruption/">Corruption</a>
+						<a class="dropdown-item" href="/login/home/Transport/">Transport</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">News</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login/abtus/">About us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login/home/{{area}}/{{loc}}/">Locality</a>
+                </li>
+
+
+
+            </ul>
+            <ul class="nav navbar-nav pull-xs-right" id="hello" >
+
+              <!--  <ul id="noti_Container" >
+                <div id="noti_Counter"></div>   <!--SHOW NOTIFICATIONS COUNT.-->
+
+                <!--A CIRCLE LIKE BUTTON TO DISPLAY NOTIFICATION DROPDOWN.
+                <div id="noti_Button">
+                   <img src="bell-icon-26.png" width="20" height="20">
+                </div>
+
+                <!--THE NOTIFICAIONS DROPDOWN BOX
+                <div id="notifications">
+                    <h3>Notifications</h3>
+
+                    <div style="height:300px;">
+
+                        <div class="list-group">
+{% for i in all_notif1 %}
+     <script>
+         alert("{{i.urls1}}");
+     </script>
+ <h3> <a href="{{i.urls1}}" class="list-group-item" style="font-size: 14px;">{{i.message}}</a></h3>
+
+ {% endfor %}
+</div>
+                    </div>
+                    <div class="seeAll"><a href="#">See All</a></div>
+                </div>
+                    </ul>-->
+                <li class="nav-item">
+                    <div class="dropdown container">
+                        <a class="nav-link" id="dropdownMenu1" onclick="myFunction()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" href="#"><img src="/media/photo/bell-icon.png"  width="20" height="20"><span class="badge pull-right" id="notifno">{{count1}}</span></a>
+                        <div class="dropdown-menu list-group notification" id="notif" style="right: 0; left: auto; width: 50%; " aria-labelledby="dropdownMenu1">
+                            <ul class="notifications">
+                                <li class="notification">
+                                    <div class=" card media">
+                                    <!--    <div class="media-left">
+                                            <div class="media-object">
+                                                <img data-src="holder.js/50x50?bg=cccccc" class="img-circle" alt="Name">
+                                            </div>
+                                        </div> -->
+                                        <div class="media-body" >
+                                            {% for i in all_notif1 %}
+                                                <script>
+                                                    alert("{{i.urls1}}");
+                                                </script>
+                                             <a href="{{i.urls1}}" class="list-group-item">{{i.message}}<br><br><div style="text-align:right;">{{i.created}}</div></a>
+
+                                                {% endfor %}
+
+                                          <!--  <strong class="notification-title"><a href="#">Dave Lister</a> commented on <a href="#">DWARF-13 - Maintenance</a></strong>
+                                            <p class="notification-desc" style="margin-left:10px;">I totally don't wanna do it. Rimmer can do it.</p>
+
+                                         <!--   <div class="notification-meta">
+                                                <small class="timestamp">27. 11. 2015, 15:00</small>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </li>
+
+
+                            </ul>
+
+
+                        </div>
+                    </div>
+                </li>
+                <script>
+                    function myFunction() {
+            document.getElementById("notifno").innerHTML = " ";
+            var url = "/login/checked1/"
+
+$.getJSON(url, function(mode) {
+
+});
+        }
+
+                </script>
+
+
+                <li class="nav-item">
+                    <div class="dropdown container">
+                       {% if user.is_authenticated %}
+                        <a class="nav-link" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" href="#"><img src="{{MEDIA_URL}}{{photo2.photo}}" style=" border-radius: 50%;" width="25" height="25"></a>
+                        {% else %}
+                        <a class="nav-link" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" href="#"><img src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" style=" border-radius: 50%;" width="25" height="25"></a>
+                        {% endif %}
+                        <div class="dropdown-menu list-group" id="profile" style="right: 0; left: auto; width: 50%; " aria-labelledby="dropdownMenu2">
+                           {% if user.is_authenticated %}
+                            <button type="button" class="list-group-item btn-block" onclick="window.location='http://127.0.0.1:8000/login/{{ user.get_username }}/profile/';">Edit Profile</button>
+                            <button type="button" class="list-group-item btn-block" onclick="window.location='http://127.0.0.1:8000/login/home/logout/';">Logout</button>
+                            {% else %}
+
+                             <button type="button" class="list-group-item btn-block">Login</button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </li>
+                 <li class="nav-item nav-link">
+                    {{ user.get_username }}
+                </li>
+</ul>
+            </div>
+        </nav>
+            <script>
+    $(document).ready(function () {
+
+        // ANIMATEDLY DISPLAY THE NOTIFICATION COUNTER.
+        $('#noti_Counter')
+            .css({ opacity: 0 })
+            .text('{{count1}}')              // ADD DYNAMIC VALUE (YOU CAN EXTRACT DATA FROM DATABASE OR XML).
+            .css({ top: '-10px' })
+            .animate({ top: '-2px', opacity: 1 }, 500);
+
+        $('#noti_Button').click(function () {
+        var url = "/login/checked1/"
+
+$.getJSON(url, function(mode) {
+
+});
+
+            // TOGGLE (SHOW OR HIDE) NOTIFICATION WINDOW.
+            $('#notifications').fadeToggle('fast', 'linear', function () {
+                if ($('#notifications').is(':hidden')) {
+                    $('#noti_Button').css('background-color', '#2E467C');
+                }
+                else $('#noti_Button').css('background-color', '#FFF');        // CHANGE BACKGROUND COLOR OF THE BUTTON.
+            });
+
+            $('#noti_Counter').fadeOut('slow');                 // HIDE THE COUNTER.
+
+            return false;
+        });
+
+        // HIDE NOTIFICATIONS WHEN CLICKED ANYWHERE ON THE PAGE.
+        $(document).click(function () {
+            $('#notifications').hide();
+
+            // CHECK IF NOTIFICATION COUNTER IS HIDDEN.
+            if ($('#noti_Counter').is(':hidden')) {
+                // CHANGE BACKGROUND COLOR OF THE BUTTON.
+                $('#noti_Button').css('background-color', '#2E467C');
+            }
+        });
+
+        $('#notifications').click(function () {
+            //return false;       // DO NOTHING WHEN CONTAINER IS CLICKED.
+        });
+    });
+</script>
+<!--/.Navbar-->
+</head>
+
+<br>
+<br>
+<br>
+<br>
+<div class="row">
+        <div class="col-md-1">
+
+        </div>
+        <div class="col-md-10 nopadding">
+
+
+
+        <div class="card">
+    <div class="card-block">
+
+        <div class="row">
+
+            <div class="col-md-1 nopadding"></div>
+        <div class="col-md-2 nopadding"><button type="button" class="btn btn-primary btn-block" onclick = "window.location='http://127.0.0.1:8000/login/home/{{area}}/{{loc}}/Road/';" >
+            Road
+        </button></div>
+        <div class="col-md-2 nopadding"><button type="button" class="btn btn-primary btn-block" onclick = "window.location='http://127.0.0.1:8000/login/home/{{area}}/{{loc}}/Water/';">
+           Water
+        </button></div>
+        <div class="col-md-2 nopadding"><button type="button" class="btn btn-primary btn-block" onclick = "window.location='http://127.0.0.1:8000/login/home/{{area}}/{{loc}}/Electricity/';">
+            Electricity
+        </button></div>
+        <div class="col-md-2 nopadding"><button type="button" class="btn btn-primary btn-block" onclick = "window.location='http://127.0.0.1:8000/login/home/{{area}}/{{loc}}/Transport/';">
+            Transport
+        </button></div>
+        <div class="col-md-2 nopadding"><button type="button" class="btn btn-primary btn-block" onclick = "window.location='http://127.0.0.1:8000/login/home/{{area}}/{{loc}}/';">
+            Original
+        </button></div>
+            <div class="col-md-1 nopadding"></div>
+
+
+			<br><br>
+
+        </div>
+		<!--<div id="mainbox">
+		<div class="card">-->
+		<div class="row">
+		<div class="col-md-1 nopadding"></div>
+		<div class="col-md-2 nopadding">
+
+
+		<label>Filters</label>
+		<select class="mdb-select colorful-select dropdown-primary" onchange="javascript:handleSelect(this)">
+		<option value="3">Least recent</option>
+		<option value="2">Most liked</option>
+		<option value="1">Most popular</option>
+
+		</select>
+            <script type="text/javascript">
+            $(".mdb-select").val("{{id}}");
+function handleSelect(elm)
+{
+window.location = "/login/home/{{area}}/{{loc}}/"+elm.value+"/";
+}
+
+</script>
+
+		</div>
+		</div>
+		<br>
+
+    {% for prob in all_prob %}
+<button  style="width:70px; height:40px" id="prob-{{forloop.counter}}" class="problem" value="{{prob}}" data-item-id="{{prob}}" data-item-i="{{count1}}" formaction="{{prob}}/" method="post">{{prob}}</button>    {% endfor %}
+    <!--Main layout-->
+    <div class="container">
+        <script>
+            alert("{{area}}")
+        </script>
+
+        {% for comment,i,j,k,l,m in list %}
+        <script>
+            alert("comment.id");
+        </script>
+
+
+        <!--First row-->
+        <div class="row">
+         <div class="col-md-2">
+
+            </div>
+
+            <!--Main information-->
+            <div class="col-md-8">
+
+                <div class="card card-block card-small ">
+                    <!--FIRST PART IE. PROFILE PIC, USR NAME ETC. -->
+                    <div class ="row">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <script>
+                                    alert("{{MEDIA_URL}}{{m}}");
+                                </script>
+                                <img src="{{MEDIA_URL}}{{m}}" class="img-fluid img-rounded z-depth-1 pull-right"  width="50" height="50">
+                            </div>
+                            <div class="col-md-3"><a href="/login/{{k}}/profile/">{{k}}</a></div>
+                            <div class="col-md-7"></div>
+                        </div>
+                    </div>
+
+
+                    <br>
+
+                    <!--SECOND PART IE. PROFILE PIC, USR NAME ETC. -->
+                    <div class ="row">
+                        <div class="col-xs-12 col-sm-6 col-md-8">
+                            <h3 class="card-title">{{l.heading}}</h3>
+                            <p class="card-text">{{comment}}</p>
+                        </div>
+                        <div class="col-xs-6 col-md-4">
+
+
+                          <!--  <img src="http://2.gravatar.com/avatar/e9de252843e9ff541060127dac7126ed?s=150&d=mm&r=g" class="img-fluid  z-depth-2"> -->
+
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <!--THIRD PART IE. SHARING ETC. -->
+                   <div class ="row">
+                       <script>
+                           alert("{{loc}}{{area}}");
+                       </script>
+
+
+                       <div class="col-md-2">
+                           <button id="discuss2-{{forloop.counter}}" value="Discuss"  data-item-id="{{ comment.id }}" onclick = "window.location='http://127.0.0.1:8000/login/home/{{area}}/{{loc}}/{{j.pk}}_discuss/';" class="btn btn-primary-outline btn-rounded waves-effect btn-sm btn-block pull-right" >Discuss</button>
+                       </div>
+
+                       <div class="col-md-2">
+                           <button id="like2-{{j.pk}}" value="{{comment}}"  data-item-id="{{ j.pk }}" class="btn btn-primary-outline btn-rounded waves-effect btn-sm btn-block pull-left">Like<span class="badge pull-right" id="change-{{j.pk}}">{{i}} </span></button>
+                       </div>
+
+                       <div class="col-md-6">
+                       </div>
+                       <div class="col-md-1">
+                           <!--Facebook-->
+                           <a class="icons-sm fb-ic"><i class="fa fa-facebook"> </i></a>
+                       </div>
+                       <div class="col-md-1">
+                           <!--Twitter-->
+                           <a class="icons-sm tw-ic"><i class="fa fa-twitter"> </i></a>
+                       </div>
+
+                    </div>
+                </div>
+                 {%  if j.pk in likes2  %}
+
+                <script>
+
+                    alert("already liked");
+
+
+
+                    $("#like2-{{j.pk}}").attr("disabled", "true");
+                </script>
+{% endif %}
+
+            </div>
+
+            <div class="col-md-2"></div>
+        </div>
+
+        {% endfor %}
+        <script>
+        alert("{{j.pk}}");
+            $('.btn').click(function() {
+    var item_id = $(this).data('item-id');
+    alert(item_id);
+    var url = "/login/like/" + item_id + "/all_json_models2";
+    var area = $(this).data('item-id');
+
+    $.getJSON(url, function(mode) {
+    alert(mode['liked']);
+    if(mode['liked']=="not logged in")
+    {
+    window.location.href = 'http://127.0.0.1:8000/login/login1/';
+    }
+   alert(mode['z']);
+    $("#change-"+item_id).html(mode['z']);
+    alert("#like2-"+item_id);
+    $("#like2-"+item_id).attr("disabled", "true");
+
+});
+return false;
+});
+        </script>
+
+        <!--/.First row-->
+
+
+        <!--WRITE POST -->
+      <!--Second row-->
+        <div class="row">
+            <!--First columnn-->
+            <div class="col-md-2">
+
+            </div>
+            <!--First columnn-->
+
+            <!--Second columnn-->
+            <div class="col-md-8">
+
+                <!--Card-->
+               <div class="card">
+
+
+
+                    <!--Card content-->
+                   <form method="post" action="">
+                    <!--Card content-->
+                    <div class="card-block card-small">
+                        <!--Title-->
+                    <!--    <h4 class="card-title">Write Post</h4> -->
+                        <!--Text-->
+                       <p class="card-text">Write post..</p>
+                        <div class ="row">
+
+                        <div class="col-md-2">
+                            <a class="btn btn-primary-outline btn-rounded waves-effect btn-sm pull-left "  data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Compose</a>
+                        </div>
+                            <div class="col-md-2">
+
+                                    {% csrf_token %}
+                                <input type="submit"  class="btn btn-primary-outline btn-rounded waves-effect btn-sm pull-left " > </input>
+
+                            </div>
+                            <div class="collapse" id="collapseExample">
+                                <div class="card card-block">
+                                    <br>
+                                    <br>
+                                    <div class="md-form">
+                                        <input type="text" id="form4" class="form-control" placeholder="Heading">
+
+                                    </div>
+
+                                            <div class="md-form">
+
+{{ form_comment.as_p }}
+                                            </div>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        <div class="col-md-8"></div>
+                        </div>
+</form>
+                    </div>
+                    <!--/.Card content-->
+
+                </div>
+                <!--/.Card-->
+
+            </div>
+            <!--Second columnn-->
+
+            <!--Third columnn-->
+            <div class="col-md-2">
+
+            </div>
+            <!--Third columnn-->
+        </div>
+        <!--/.Second row-->
+    </div>
+    <!--/.Main layout-->
+
+
+<!-- FOOTER-->
+<div class="row">
+    <!--First columnn-->
+
+
+    <!--Second columnn-->
+    <div class="col-md-12">
+
+        <!--Footer-->
+        <footer class="page-footer center-on-small-only">
+
+            <!--Footer Links-->
+            <div class="container-fluid">
+                <div class="row">
+
+                    <!--First column-->
+                    <div class="col-md-3 col-md-offset-1">
+                        <h5 class="title">Footer Content</h5>
+                        <p>Here you can use rows and columns here to organize your footer content.</p>
+                    </div>
+                    <!--/.First column-->
+
+                    <hr class="hidden-md-up">
+
+                    <!--Second column-->
+                    <div class="col-md-2 col-md-offset-1">
+                        <h7 class="title">Links</h7>
+                        <ul>
+                            <li><a href="#!">Link 1</a></li>
+
+                        </ul>
+                    </div>
+                    <!--/.Second column-->
+
+                    <hr class="hidden-md-up">
+
+                    <!--Third column-->
+                    <div class="col-md-2">
+                        <h7 class="title">Links</h7>
+                        <ul>
+                            <li><a href="#!">Link 1</a></li>
+
+                        </ul>
+                    </div>
+                    <!--/.Third column-->
+
+                    <hr class="hidden-md-up">
+
+                    <!--Fourth column-->
+                    <div class="col-md-2">
+                        <h7 class="title">Links</h7>
+                        <ul>
+                            <li><a href="#!">Link 1</a></li>
+
+                        </ul>
+                    </div>
+                    <!--/.Fourth column-->
+
+                </div>
+            </div>
+            <!--/.Footer Links-->
+
+
+
+            <!--Call to action-->
+            <div class="call-to-action">
+                <ul>
+                    <li>
+                        <h5>Register for free</h5></li>
+                    <li><a href="" class="btn btn-danger">Sign up!</a></li>
+                </ul>
+            </div>
+            <!--/.Call to action-->
+
+
+
+            <!--Social buttons-->
+            <div class="social-section">
+                <ul>
+                    <li><a class="btn-floating btn-small btn-fb"><i class="fa fa-facebook"> </i></a></li>
+                    <li><a class="btn-floating btn-small btn-tw"><i class="fa fa-twitter"> </i></a></li>
+
+                </ul>
+            </div>
+            <!--/.Social buttons-->
+
+            <!--Copyright-->
+       <!--     <div class="footer-copyright">
+                <div class="container-fluid">
+                    © 2015 Copyright: <a href="http://www.MDBootstrap.com"> MDBootstrap.com </a>
+
+                </div>
+            </div> -->
+            <!--/.Copyright-->
+
+        </footer>
+        <!--/.Footer-->
+
+    </div>
+    <!--Second columnn-->
+
+    <!--Third columnn-->
+
+    <!--Third columnn-->
+</div>
+
+<!-- /Start your project here-->
+
+
+<!-- SCRIPTS -->
+
+<!-- JQuery -->
+
+
+</body>
+
+</html>
+{% endwith %}

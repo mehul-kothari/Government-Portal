@@ -1,0 +1,492 @@
+ {% load staticfiles %}
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Material Design Bootstrap</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'Login/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Material Design Bootstrap -->
+    <link href="{% static 'Login/mdb.min.css' %}" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Your custom styles (optional) -->
+    <link href="{% static 'Login/style.css' %}" rel="stylesheet">
+
+</head>
+
+<body >
+
+
+<!-- Start your project here-->
+
+
+<!--Navbar-->
+<nav class="navbar navbar-fixed-top scrolling-navbar navbar-dark bg-primary navbar navbar-light grey ">
+
+        <div class="container">
+
+            <!--Navbar Brand-->
+            <a class="navbar-brand" href="#">GovForum</a>
+
+            <!--Links-->
+            <ul class="nav navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/login/home/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <div class="dropdown">
+                        <a href="#">
+                            <span class="glyphicon glyphicon-user"></span>
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a href="#">Logout</a></li>
+                            <li><a href="#">Edit Profile</a></li>
+                            <li><a href="#">Change Password</a></li>
+
+                        </ul>
+                    </div>
+
+                </li>
+                <!--<li class="nav-item">
+                    <a class="nav-link" href="#">Forum</a>
+                </li>-->
+				<li class="nav-item btn-group">
+                    <a class="nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Forum</a>
+                    <div class="dropdown-menu " aria-labelledby="dropdownMenu1">
+                        <a class="dropdown-item" href="/login/home/Railway/">Railways</a>
+                        <a class="dropdown-item" href="/login/home/Eve-teasing/">Eve-teasing</a>
+                        <a class="dropdown-item" href="/login/home/Hospitals/">Hospitals</a>
+						<a class="dropdown-item" href="/login/home/Corruption/">Corruption</a>
+						<a class="dropdown-item" href="/login/home/Transport/">Transport</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">News</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login/home/{{area}}/{{loc}}/">Locality</a>
+                </li>
+
+
+
+            </ul>
+            <ul class="nav navbar-nav pull-xs-right" id="hello" >
+                <li class="nav-item">
+                    <div class="dropdown container">
+                        <a class="nav-link" id="dropdownMenu1" onclick="myFunction()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" href="#"><img src="/media/photo/bell-icon.png"  width="20" height="20"><span class="badge pull-right" id="notifno">{{count1}}</span></a>
+                        <div class="dropdown-menu list-group notification" id="notif" style="right: 0; left: auto; width: 50%; " aria-labelledby="dropdownMenu1">
+                            <ul class="notifications">
+                                <li class="notification">
+                                    <div class=" card media">
+                                    <!--    <div class="media-left">
+                                            <div class="media-object">
+                                                <img data-src="holder.js/50x50?bg=cccccc" class="img-circle" alt="Name">
+                                            </div>
+                                        </div> -->
+                                        <div class="media-body" >
+                                            {% for i in all_notif1 %}
+                                                <script>
+                                                    alert("{{i.urls1}}");
+                                                </script>
+                                             <a href="{{i.urls1}}" class="list-group-item">{{i.message}}<br><br><div style="text-align:right;">{{i.created}}</div></a>
+
+                                                {% endfor %}
+
+                                          <!--  <strong class="notification-title"><a href="#">Dave Lister</a> commented on <a href="#">DWARF-13 - Maintenance</a></strong>
+                                            <p class="notification-desc" style="margin-left:10px;">I totally don't wanna do it. Rimmer can do it.</p>
+
+                                         <!--   <div class="notification-meta">
+                                                <small class="timestamp">27. 11. 2015, 15:00</small>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </li>
+
+
+                            </ul>
+
+
+                        </div>
+                    </div>
+                </li>
+                <script>
+                    function myFunction() {
+            document.getElementById("notifno").innerHTML = " ";
+            var url = "/login/checked1/"
+
+$.getJSON(url, function(mode) {
+
+);
+        }
+        </script>
+<li class="nav-item">
+                    <div class="dropdown container">
+                        {% if user.is_authenticated %}
+                        <a class="nav-link" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" href="#"><img src="{{MEDIA_URL}}{{photo2.photo}}" style=" border-radius: 50%;" width="25" height="25"></a>
+                        {% else %}
+                        <a class="nav-link" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" href="#"><img src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" style=" border-radius: 50%;" width="25" height="25"></a>
+                        {% endif %}
+                        <div class="dropdown-menu list-group" id="profile" style="right: 0; left: auto; width: 50%; " aria-labelledby="dropdownMenu2">
+                           {% if user.is_authenticated %}
+                            <button type="button" class="list-group-item btn-block" onclick="window.location='http://127.0.0.1:8000/login/{{ user.get_username }}/profile/';">Edit Profile</button>
+                            <button type="button" class="list-group-item btn-block" onclick="window.location='http://127.0.0.1:8000/login/home/logout/';">Logout</button>
+                            {% else %}
+
+                             <button type="button" class="list-group-item btn-block">Login</button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </li>
+                 <li class="nav-item nav-link">
+                    {{ user.get_username }}
+                </li>
+</ul>
+            </div>
+        </nav>
+            <script>
+    $(document).ready(function () {
+
+        // ANIMATEDLY DISPLAY THE NOTIFICATION COUNTER.
+        $('#noti_Counter')
+            .css({ opacity: 0 })
+            .text('{{count1}}')              // ADD DYNAMIC VALUE (YOU CAN EXTRACT DATA FROM DATABASE OR XML).
+            .css({ top: '-10px' })
+            .animate({ top: '-2px', opacity: 1 }, 500);
+
+        $('#noti_Button').click(function () {
+        var url = "/login/checked1/"
+
+$.getJSON(url, function(mode) {
+
+});
+
+            // TOGGLE (SHOW OR HIDE) NOTIFICATION WINDOW.
+            $('#notifications').fadeToggle('fast', 'linear', function () {
+                if ($('#notifications').is(':hidden')) {
+                    $('#noti_Button').css('background-color', '#2E467C');
+                }
+                else $('#noti_Button').css('background-color', '#FFF');        // CHANGE BACKGROUND COLOR OF THE BUTTON.
+            });
+
+            $('#noti_Counter').fadeOut('slow');                 // HIDE THE COUNTER.
+
+            return false;
+        });
+
+        // HIDE NOTIFICATIONS WHEN CLICKED ANYWHERE ON THE PAGE.
+        $(document).click(function () {
+            $('#notifications').hide();
+
+            // CHECK IF NOTIFICATION COUNTER IS HIDDEN.
+            if ($('#noti_Counter').is(':hidden')) {
+                // CHANGE BACKGROUND COLOR OF THE BUTTON.
+                $('#noti_Button').css('background-color', '#2E467C');
+            }
+        });
+
+        $('#notifications').click(function () {
+            //return false;       // DO NOTHING WHEN CONTAINER IS CLICKED.
+        });
+    });
+</script>
+<!--/.Navbar-->
+
+<!--Main layout-->
+<!--<div class="container">-->
+    <!--First row-->
+    <!--<div class="row">
+        <div class="col-md-2">
+
+        </div>
+
+        <!--Main information-->
+      <!--  <div class="col-md-6">
+
+        </div>
+
+        <div class="col-md-4">
+
+        </div>
+    </div>-->
+    <!--/.First row-->
+<!-- Dunno but w/o these breaks About Author will not be visible -->
+  <div class=" blue-grey lighten-4">
+<br>
+
+<div class="row">
+        <div class="col-md-1">
+
+        </div>
+        <div class="col-md-10 nopadding">
+
+
+
+        <div class="card">
+    <div class="card-block grey lighten-3">
+
+        <div class="row">
+
+            <div class="col-md-1 nopadding"></div>
+
+             <div class="col-md-10">
+
+                <div class="card card-block card-small ">
+                    <!--FIRST PART IE. PROFILE PIC, USR NAME ETC. -->
+                    <div class ="row" >
+    <!--Section: Author box-->
+<!--   <div id="mainbox">
+<div class="card">-->
+	<section class="m-b-4">
+
+        <!--Author box-->
+     <div class="author-box">
+
+            <div class="row" >
+                <!--Name-->
+                <h2 class="h2-responsive text-xs-center">Your Profile</h2>
+
+</div>
+                <!--Avatar-->
+                <div class="col-xs-12 col-sm-2">
+                    <img src="{{MEDIA_URL}}{{photo}}" class="img-fluid  z-depth-2">
+                </div>
+
+                <!--Author Data-->
+                <div class=" col-xs-12 col-sm-10 col-md-8">
+
+                    <p><strong>{{user}}</strong></p>
+
+                    <div class="personal-sm">
+                        <a class="email-ic"><i class="fa fa-home"> </i></a>
+                        <a class="fb-ic"><i class="fa fa-facebook"> </i></a>
+                        <a class="tw-ic"><i class="fa fa-twitter"> </i></a>
+                        <a class="gplus-ic"><i class="fa fa-google-plus"> </i></a>
+                        <a class="li-ic"><i class="fa fa-linkedin"> </i></a>
+                        <a class="email-ic"><i class="fa fa-envelope-o"> </i></a>
+                    </div>
+
+                    <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
+                    <p class="hidden-md-down">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint esse nulla quia quam veniam commodi dicta, iusto inventore. Voluptatum pariatur eveniet ea, officiis vitae praesentium beatae quas libero, esse
+                        facere.</p>
+					<p>City:Mumbai<br>
+					   Area:{{area}}<br>
+					   Locality:{{loc}}<br>
+						<div id="mainbox">
+						<div class="card">
+						<h4>Recent Activites</h4>
+                            <h6> General Problems:liked</h6>
+						</div>
+                    {% for l,m,n in list %}
+                    <script>
+                        alert("hello");
+                    </script>
+                    <pre> Liked <a href="/login/{{l}}/profile/">{{l}}</a> <a href="/login/home/{{m}}/#{{n.details}}">post</a> something about<a href="/login/home/{{m}}/"> {{m}}</a> </pre>
+                    {% endfor %}
+                    <div class="card">
+
+                            <h6> General Problems:comments</h6>
+
+						</div>
+                    {% for i,j,k in list1 %}
+                    <pre>commented on <a href="/login/{{i}}/profile/">{{i}}</a><a href="/login/home/{{j}}/{{k.0}}_discuss/"> post</a> on something</pre>
+                    {% endfor %}
+						</div>
+
+                    </div>
+                    <br>
+						<!--<div id="mainbox">
+						<div class="card">-->
+
+
+            </div>
+
+
+
+                       <!--     <div class="container">  -->
+<script>
+    alert("{{user}}");
+    alert("{{user2}}");
+</script>
+        {% for i,j in list3 %}
+
+
+        <!--First row-->
+        <div class="row" >
+         <div class="col-md-2 ">
+
+            </div>
+
+            <!--Main information-->
+            <div class="col-md-8">
+
+                <div class="card card-block card-small ">
+                    <!--FIRST PART IE. PROFILE PIC, USR NAME ETC. -->
+                    <div class ="row">
+                        <div class="row">
+                            <div class="col-md-2">
+
+                            </div>
+                            <div class="col-md-3">{{i.user}}</div>
+                            <div class="col-md-7"></div>
+                        </div>
+                    </div>
+
+
+                    <br>
+
+                    <!--SECOND PART IE. PROFILE PIC, USR NAME ETC. -->
+                    <div class ="row">
+                        <div class="col-xs-12 col-sm-6 col-md-8">
+                            <h3 class="card-title">{{i.heading}}</h3>
+                            <p class="card-text">{{i}}</p>
+                        </div>
+                        <div class="col-xs-6 col-md-4">
+
+
+                          <!--  <img src="http://2.gravatar.com/avatar/e9de252843e9ff541060127dac7126ed?s=150&d=mm&r=g" class="img-fluid  z-depth-2"> -->
+
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <!--THIRD PART IE. SHARING ETC. -->
+                   <div class ="row">
+
+
+
+
+                       <div class="col-md-2">
+
+                       </div>
+
+                       <div class="col-md-6">
+                       </div>
+                       <div class="col-md-1">
+                           <!--Facebook-->
+                           <a class="icons-sm fb-ic"><i class="fa fa-facebook"> </i></a>
+                       </div>
+                       <div class="col-md-1">
+                           <!--Twitter-->
+                           <a class="icons-sm tw-ic"><i class="fa fa-twitter"> </i></a>
+                       </div>
+
+                    </div>
+                </div>
+
+                </div><div>
+                <script>
+
+                    alert("{{i.id}}");
+
+
+                    $(".btn").attr("disabled", "true");
+                </script>
+
+
+            </div>
+
+            <div class="col-md-2"></div>
+
+<br><br>
+
+						Problem Solved:
+            <div class="checkbox" id="check">
+
+
+
+                            {% if j.done %}
+                            <script>
+                                alert("{{j.done}}");
+                            </script>
+						<label class="checkbox-inline"><input data-item-id="{{i.id}}" id="check-{{i.id}}" class="checkbox" type="checkbox" checked="checked" value="">YES</label>&nbsp&nbsp
+                        {% else %}
+                            <script>
+                                alert("not done");
+                            </script>
+                            <label class="checkbox-inline"><input data-item-id="{{i.id}}" id="check1-{{i.id}}" class="checkbox" type="checkbox" value="">YES</label>&nbsp&nbsp
+						{% endif %}
+                        </div>
+            {% if checking %}
+            <script>
+            alert("not same");
+
+               $(".checkbox").attr("disabled", true);
+            </script>
+
+                {% endif %}
+
+
+
+ <script>
+    $(document).ready(function () {
+   $('#check1-{{i.id}}').change(function() {
+      console.log($(this).attr('id') + "box was clicked");
+      alert($(this).attr('id') + " box clicked...");
+      var item_id = $('#check1-{{i.id}}').data('item-id');
+    alert(item_id);
+    var url = "/login/checked/"+ item_id +"/";
+     $.getJSON(url, function(mode) {
+    alert("hello");
+    });
+return false;
+   });
+});
+</script>
+
+						</div>
+
+                {% endfor %}
+
+
+
+
+					   <!--</div>
+
+
+
+            </div>-->
+       <!-- </div> -->
+        <!--/.Author box-->
+
+    </section>
+</div>
+</div><!--/Section: Author box-->
+</div>
+</div>
+</div>
+</div>
+<!-- /Start your project here-->
+</div>
+      </div>
+
+<!-- SCRIPTS -->
+
+<!-- JQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="{% static 'Login/tether.min.js' %}"></script>
+
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="{% static 'Login/bootstrap.min.js' %}"></script>
+
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="{% static 'Login/mdb.min.js' %}"></script>
+
+
+</body>
+
+</html>

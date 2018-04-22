@@ -1,0 +1,127 @@
+{% load staticfiles %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <style>
+
+
+
+        div.textarea{
+ margin: 0px 500px 0px 500px;
+float:left;
+        }
+              div.contain {
+    background-color: #eee;
+    width: 600px;
+    height: 600px;
+    border: 1px dotted black;
+    overflow: scroll;
+    margin: 60px 500px 0px 400px;
+    padding: 50px 30px 50px 80px;
+}
+ div.contain1 {
+    background-color: #eee;
+    width: 500px;
+    height: 150px;
+    border: 1px dotted black;
+    overflow: scroll;
+
+
+}
+.btn{
+background:none!important;
+     border:none;
+     padding:0!important;
+
+    /*optional*/
+    font-family:arial,sans-serif; /*input has OS specific font-family*/
+     color:#069;
+     text-decoration:underline;
+     cursor:pointer;
+}
+
+    </style>
+
+</head>
+<body>
+<form method="POST"  >
+     {% csrf_token %}
+    {{ selected_item }}
+    <center><h1>{{ selected_item }}</h1></center>
+    <div class="contain">
+    {% if link %}
+        <button class="btn">this is</button>
+        {% endif %}
+    {% for detail in all_details %}
+        <div class="contain1" id="contain2" >
+            <div class="contain3" id="contain_3">
+    {{detail}}
+                {%  if detail.id in likes2  %}
+
+                <script>
+                    alert("already liked");
+                </script>
+{% endif %}
+
+                </div>
+           <button   style="width:70px; height:40px" id="like2-{{forloop.counter}}" value="{{detail}}" class="item" data-item-id="{{ detail.id }}">Like</button>
+            <input  type="button" style="width:70px; height:40px" id="discuss2-{{forloop.counter}}" value="Discuss" class="discuss" data-item-id="{{ detail.id }}" onclick = "window.location='http://127.0.0.1:8000/login/home/{{problem}}/{{detail.id}}_discuss/';" >
+</div>
+
+        {% endfor %}
+
+
+    </div>
+
+
+
+
+    <div class="textarea">
+
+        {{ form_details.as_p }}
+
+
+        <input type="submit" value="click" style="width:70px; height:40px" >
+        </div>
+
+
+
+
+    </form>
+<script>
+$('.btn').click(function() {
+    var item_id = $(this).data('item-id');
+    alert(item_id);
+    var url = "/login/like/" + item_id + "/all_json_model";
+    var area = $(this).data('item-id');
+
+    $.getJSON(url, function(mode) {
+    alert(mode[0]);
+
+});
+return false;
+});
+
+$('.item').click(function() {
+    var item_id = $(this).data('item-id');
+    alert(item_id);
+    var url = "/login/like/" + item_id + "/all_json_model";
+    var area = $(this).data('item-id');
+
+    $.getJSON(url, function(mode) {
+    alert(mode['liked']);
+    if(mode['liked']=="not logged in")
+    {
+    window.location.href = 'http://127.0.0.1:8000/login/login1/';
+    }
+
+});
+return false;
+});
+
+</script>
+</body>
+</html>

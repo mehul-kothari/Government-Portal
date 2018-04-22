@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+div.textarea{
+ margin: 0px 500px 0px 500px;
+float:left;
+        }
+              div.contain {
+    background-color: #eee;
+    width: 600px;
+    height: 600px;
+    border: 1px dotted black;
+    overflow: scroll;
+    margin: 60px 500px 0px 400px;
+    padding: 50px 30px 50px 80px;
+}
+ div.contain1 {
+    background-color: #eee;
+    width: 500px;
+    height: 150px;
+    border: 1px dotted black;
+    overflow: scroll;
+
+
+}
+.btn{
+background:none!important;
+     border:none;
+     padding:0!important;
+
+    /*optional*/
+    font-family:arial,sans-serif; /*input has OS specific font-family*/
+     color:#069;
+     text-decoration:underline;
+     cursor:pointer;
+}
+
+    </style>
+</head>
+<body>
+
+
+<form method="POST" action="">
+    {% csrf_token %}
+ <div class="contain">
+    {% for comment in all_comments %}
+        <div class="contain1" id="contain2" >
+            <div class="contain3" id="contain_3">
+    {{comment}}
+
+
+</div>
+           <button   style="width:70px; height:40px" id="like2-{{forloop.counter}}" value="{{detail}}" class="item" data-item-id="{{ detail.id }}">Like</button>
+
+</div>
+
+        {% endfor %}
+
+
+    </div>
+
+
+
+
+    <div class="textarea">
+
+        {{ form_comment.as_p }}
+
+
+        <input type="submit" value="click" style="width:70px; height:40px" >
+        </div>
+
+
+
+
+    </form>
+</body>
+</html>

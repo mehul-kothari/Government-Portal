@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+{% load avatar_tags %}
+<html>
+    <head>
+        <title>Register</title>
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+        <script src="{% static 'Login/js/truth.js' %}"></script>
+         <style>
+
+
+
+.login-page {
+  width: 360px;
+  padding: 8% 0 0;
+  margin: auto;
+  position:relative;
+
+}
+.form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: left;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.form input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+#myButton {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #4CAF50;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+
+
+#r {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: yellow;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.form button:hover,.form button:active,.form button:focus {
+  background: #43A047;
+}
+.form .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+.form .message a {
+  color: #4CAF50;
+  text-decoration: none;
+}
+.form .register-form {
+  display: none;
+}
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 300px;
+  margin: 0 auto;
+}
+.container:before, .container:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.container .info {
+  margin: 50px auto;
+  text-align: center;
+}
+.container .info h1 {
+  margin: 0 0 15px;
+  padding: 0;
+  font-size: 36px;
+  font-weight: 300;
+  color: #1a1a1a;
+}
+.container .info span {
+  color: #4d4d4d;
+  font-size: 12px;
+}
+.container .info span a {
+  color: #000000;
+  text-decoration: none;
+}
+.container .info span .fa {
+  color: #EF3B3A;
+}
+body {
+  background-image: url("https://youdrinkwedrive.org/wp-content/uploads/2014/11/blur-city-street.jpg"); /* fallback for old browsers */
+ // background: -webkit-linear-gradient(right, #76b852, #8DC26F);
+  //background: -moz-linear-gradient(right, #76b852, #8DC26F);
+  //background: -o-linear-gradient(right, #76b852, #8DC26F);
+  //background: linear-gradient(to left, #76b852, #8DC26F);
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+#home {
+    position:absolute;
+    width: 400px;
+    height: 600px;
+    background-color: red;
+}
+.user {
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+
+}
+#map{
+height: 100%;
+width:100%;
+}
+
+
+
+    </style>
+    </head>
+
+    <body>
+
+        <h1></h1>
+
+        {% if registered %}
+         <strong></strong>
+        <a href="#"></a><br />
+        {% else %}
+        Rango says: <strong></strong><br />
+        <div class="login-page">
+  <div class="form">
+        <form class="login-form" id="user_form" method="post"
+                enctype="multipart/form-data">
+
+
+            {% csrf_token %}
+            <div class="user">
+               <img src="/media/photo/765-default-avatar.png" style=" border-radius: 50% ; display: inline-block; width: 150px;height: 150px;background-repeat: no-repeat; background-position: center center;background-size: cover;" id="profile">
+</div>
+            <p>
+<ul>
+       <!--  <li>
+       <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">Login with Facebook</a>
+     </li>-->
+   <!--  <li>
+       <a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a>
+     </li>
+     <!--<li>
+       <a href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}">Login with Twitter</a>
+     </li>-->
+
+   </ul>
+ </p>
+
+            {{ profile_form.as_p }}
+            <!--<a href="{% url 'avatar_change' %}"> Change your avatar</a>-->
+            <!-- Display each form. The as_p method wraps each element in a paragraph
+                 (<p>) element. This ensures each element appears on a new line,
+                 making everything look neater. -->
+            {{ user_form.as_p }}
+            {% if error_select %}
+            please select something
+            {% endif %}
+            {% if error_select1 %}
+            please select something
+            {% endif %}
+            <select name="area" id="area2">
+
+<option value="Z">Select an Area</option>
+
+{% for area in area_list %}
+
+<option value="{{ area.areas1 }}">{{ area.areas1 }}</option>
+
+{% endfor %}
+
+</select>
+
+
+
+
+
+
+            <select name="model" id="model" disabled="true">
+
+<option>Select a model</option>
+
+</select>
+            &nbsp;
+
+
+
+            <!-- Provide a button to click to submit the form. -->
+            <input id="mybutton" type="submit" name="submit" value="Register" formaction="/login/register/" onClick="changin()">
+        </form>
+       </div>
+</div>
+
+        {% endif %}
+
+<script>
+$(document).ready(
+
+function() {
+
+$('select#area2').change(function() {
+        alert("hello");
+if ($(this).val() == 'Z') {
+ alert("hello");
+$("select#model").html("<option>Select a model</option>");
+
+$("select#model").attr('disabled', true);
+
+}
+else{
+ alert("hello");
+    var url = "/login/area/" + $(this).val() + "/all_json_models";
+    var area = $(this).val();
+    alert(area);
+    $.getJSON(url, function(models) {
+
+var options = '<option value="Z">Select a locality</option>';
+
+for (var i = 0; i < models.length; i++) {
+
+
+options += '<option value="' +  models[i].fields['localities1'] + '">' + models[i].fields['localities1'] + '</option>';
+
+}
+$("select#model").html(options);
+
+$("select#model option:first").attr('selected', 'selected');
+
+$("select#model").attr('disabled', false);
+
+});
+}
+});
+});
+
+$(document).ready(
+
+function() {
+
+$("#id_photo").change(function() {
+if($("#id_photo").val() == '')
+{
+alert("somethings not been uploaded");
+ }
+ else
+ {
+ alert($("#id_photo").val());
+ var a=$("#id_photo").val();
+ var b=a.search("fakepath");
+ var c=a.substr(b+8);
+ str1="\\media\\photo"
+ var res = str1.concat(c);
+ alert(b);
+ alert(c);
+ alert(res);
+
+ $('#profile').attr('src', res);
+ }
+ });
+
+
+
+});
+
+
+
+</script>
+
+    </body>
+</html>

@@ -1,0 +1,481 @@
+{% load staticfiles %}
+
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>About us</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'Login/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Material Design Bootstrap -->
+    <link href="{% static 'Login/mdb.min.css' %}" rel="stylesheet">
+
+    <!-- Your custom styles (optional) -->
+    <link href="{% static 'Login/bootstrap-extensions.css' %}" rel="stylesheet">
+	<style>
+
+	#mainbox{
+	position:absolute;
+	left:175px;
+	width:975px;}
+
+
+
+	</style>
+
+</head>
+
+<body>
+
+
+<!-- Start your project here-->
+
+
+
+
+<head>
+<!--Navbar-->
+<nav class="navbar navbar-fixed-top scrolling-navbar navbar-dark bg-primary navbar navbar-light grey ">
+
+        <div class="container">
+
+            <!--Navbar Brand-->
+            <a class="navbar-brand" href="#">GovForum</a>
+
+            <!--Links-->
+            <ul class="nav navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/login/home/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <div class="dropdown">
+                        <a href="#">
+                            <span class="glyphicon glyphicon-user"></span>
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a href="#">Logout</a></li>
+                            <li><a href="#">Edit Profile</a></li>
+                            <li><a href="#">Change Password</a></li>
+
+                        </ul>
+                    </div>
+
+                </li>
+                <!--<li class="nav-item">
+                    <a class="nav-link" href="#">Forum</a>
+                </li>-->
+				<li class="nav-item btn-group">
+                    <a class="nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Forum</a>
+                    <div class="dropdown-menu " aria-labelledby="dropdownMenu1">
+                        <a class="dropdown-item" href="/login/home/Railway/">Railways</a>
+                        <a class="dropdown-item" href="/login/home/Eve-teasing/">Eve-teasing</a>
+                        <a class="dropdown-item" href="/login/home/Hospitals/">Hospitals</a>
+						<a class="dropdown-item" href="/login/home/Corruption/">Corruption</a>
+						<a class="dropdown-item" href="/login/home/Transport/">Transport</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">News</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login/home/{{area}}/{{loc}}/">Locality</a>
+                </li>
+
+
+
+            </ul>
+            <ul class="nav navbar-nav pull-xs-right" id="hello" >
+                <li class="nav-item">
+                    <div class="dropdown container">
+                        <a class="nav-link" id="dropdownMenu1" onclick="myFunction()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" href="#"><img src="/media/photo/bell-icon.png"  width="20" height="20"><span class="badge pull-right" id="notifno">{{count1}}</span></a>
+                        <div class="dropdown-menu list-group notification" id="notif" style="right: 0; left: auto; width: 50%; " aria-labelledby="dropdownMenu1">
+                            <ul class="notifications">
+                                <li class="notification">
+                                    <div class=" card media">
+                                    <!--    <div class="media-left">
+                                            <div class="media-object">
+                                                <img data-src="holder.js/50x50?bg=cccccc" class="img-circle" alt="Name">
+                                            </div>
+                                        </div> -->
+                                        <div class="media-body" >
+                                            {% for i in all_notif1 %}
+                                                <script>
+                                                    alert("{{i.urls1}}");
+                                                </script>
+                                             <a href="{{i.urls1}}" class="list-group-item">{{i.message}}<br><br><div style="text-align:right;">{{i.created}}</div></a>
+
+                                                {% endfor %}
+
+                                          <!--  <strong class="notification-title"><a href="#">Dave Lister</a> commented on <a href="#">DWARF-13 - Maintenance</a></strong>
+                                            <p class="notification-desc" style="margin-left:10px;">I totally don't wanna do it. Rimmer can do it.</p>
+
+                                         <!--   <div class="notification-meta">
+                                                <small class="timestamp">27. 11. 2015, 15:00</small>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </li>
+
+
+                            </ul>
+
+
+                        </div>
+                    </div>
+                </li>
+                <script>
+                    function myFunction() {
+            document.getElementById("notifno").innerHTML = " ";
+            var url = "/login/checked1/"
+
+$.getJSON(url, function(mode) {
+
+);
+        }
+        </script>
+
+
+
+             <!--   <ul id="noti_Container" >
+                <div id="noti_Counter"></div>   <!--SHOW NOTIFICATIONS COUNT.-->
+
+                <!--A CIRCLE LIKE BUTTON TO DISPLAY NOTIFICATION DROPDOWN.
+                <div id="noti_Button">
+                   <img src="bell-icon-26.png" width="20" height="20">
+                </div>
+
+                <!--THE NOTIFICAIONS DROPDOWN BOX
+                <div id="notifications">
+                    <h3>Notifications</h3>
+
+                    <div style="height:300px;">
+
+                        <div class="list-group">
+{% for i in all_notif1 %}
+     <script>
+         alert("{{i.urls1}}");
+     </script>
+ <h3> <a href="{{i.urls1}}" class="list-group-item" style="font-size: 14px;">{{i.message}}</a></h3>
+
+ {% endfor %}
+</div>
+                    </div>
+                    <div class="seeAll"><a href="#">See All</a></div>
+                </div>
+                    </ul>
+-->
+
+                <li class="nav-item">
+                    <div class="dropdown container">
+                        {% if user.is_authenticated %}
+                        <a class="nav-link" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" href="#"><img src="{{MEDIA_URL}}{{photo2.photo}}" style=" border-radius: 50%;" width="25" height="25"></a>
+                        {% else %}
+                        <a class="nav-link" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" href="#"><img src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" style=" border-radius: 50%;" width="25" height="25"></a>
+                        {% endif %}
+                        <div class="dropdown-menu list-group" id="profile" style="right: 0; left: auto; width: 50%; " aria-labelledby="dropdownMenu2">
+                           {% if user.is_authenticated %}
+                            <button type="button" class="list-group-item btn-block" onclick="window.location='http://127.0.0.1:8000/login/{{ user.get_username }}/profile/';">Edit Profile</button>
+                            <button type="button" class="list-group-item btn-block" onclick="window.location='http://127.0.0.1:8000/login/home/logout/';">Logout</button>
+                            {% else %}
+
+                             <button type="button" class="list-group-item btn-block">Login</button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </li>
+                 <li class="nav-item nav-link">
+                    {{ user.get_username }}
+                </li>
+</ul>
+            </div>
+        </nav>
+            <script>
+    $(document).ready(function () {
+
+        // ANIMATEDLY DISPLAY THE NOTIFICATION COUNTER.
+        $('#noti_Counter')
+            .css({ opacity: 0 })
+            .text('{{count1}}')              // ADD DYNAMIC VALUE (YOU CAN EXTRACT DATA FROM DATABASE OR XML).
+            .css({ top: '-10px' })
+            .animate({ top: '-2px', opacity: 1 }, 500);
+
+        $('#noti_Button').click(function () {
+        var url = "/login/checked1/"
+
+$.getJSON(url, function(mode) {
+
+});
+
+            // TOGGLE (SHOW OR HIDE) NOTIFICATION WINDOW.
+            $('#notifications').fadeToggle('fast', 'linear', function () {
+                if ($('#notifications').is(':hidden')) {
+                    $('#noti_Button').css('background-color', '#2E467C');
+                }
+                else $('#noti_Button').css('background-color', '#FFF');        // CHANGE BACKGROUND COLOR OF THE BUTTON.
+            });
+
+            $('#noti_Counter').fadeOut('slow');                 // HIDE THE COUNTER.
+
+            return false;
+        });
+
+        // HIDE NOTIFICATIONS WHEN CLICKED ANYWHERE ON THE PAGE.
+        $(document).click(function () {
+            $('#notifications').hide();
+
+            // CHECK IF NOTIFICATION COUNTER IS HIDDEN.
+            if ($('#noti_Counter').is(':hidden')) {
+                // CHANGE BACKGROUND COLOR OF THE BUTTON.
+                $('#noti_Button').css('background-color', '#2E467C');
+            }
+        });
+
+        $('#notifications').click(function () {
+            //return false;       // DO NOTHING WHEN CONTAINER IS CLICKED.
+        });
+    });
+</script>
+<!--/.Navbar-->
+</head>
+
+<br><br><br>
+<!--<div class="container">
+        <!--First row-->
+<!--        <div class="row">
+         <div class="col-md-12">
+		 <div class="mainImg">
+<img src=" C:\Program Files (x86)\bootstrap-3.3.7-dist\MDB-Free\About_Us.jpg" >
+		</div>
+            </div>
+			</div>
+			</div> -->
+<div class=" blue-grey lighten-4">
+
+<br>
+<div class="row">
+        <div class="col-md-1">
+
+        </div>
+        <div class="col-md-10 nopadding">
+
+
+
+        <div class="card">
+    <div class="card-block grey lighten-3">
+
+        <div class="row">
+
+            <div class="col-md-1 nopadding"></div>
+
+             <div class="col-md-10">
+
+                <div class="card card-block card-small ">
+                    <!--FIRST PART IE. PROFILE PIC, USR NAME ETC. -->
+                    <div class ="row" >
+
+ <!-- <div id="mainbox">
+<div class="card">-->
+	<section class="m-b-4">
+
+        <!--Author box-->
+        <div class="author-box">
+
+            <div class="row">
+                <!--Name-->
+                <h2 class="h2-responsive text-xs-center"><br>About Us</h2>
+
+			</div>	<br>
+	<div id="about" class="container">
+		<div class="row">
+			<div class="col-xs-12">
+
+				<h3>Our background</h3>
+
+				<p>This website is a unique path breaking initiative. It is a unique first of its kind participatory governance initiative involving the common citizen at large. The idea of this website is to bring the government closer to the common man by the use of online platform creating an interface for healthy exchange of ideas and views involving the common citizen and experts with the ultimate goal to contribute to the social and economic transformation of Mumbai. This website will be more than successful in keeping the citizens engaged on important policy issues and governance. There is no doubt that this platform will make inroads in diminishing the gap which has traditionally existed between the citizen and the government.</p>
+
+				<p>This website will become a key part of the policy and decision making process of the country. Where the platform has been able to provide the citizens a voice in the governance process of the country and create grounds for the citizens to become stakeholders not only in policy formulation and recommendation bit but also implementation through actionable tasks. Given the importance of this platform in transformation of Mumbai through participatory governance, the platform has been constantly undergoing upgrades to ensure an enhanced level of user experience. The major attributes of this website includes Discussion, Likes, Notifications and Blogs on various groups based on the diverse governance and public policy issues.</p>
+
+
+
+
+
+				<h4>Our Developers</h4>
+
+				<div class="container text-center">
+				<div class="row">
+				<div class="col-sm-6 col-md-4">
+				<div class="thumbnail">
+				<div class="item">
+				<img src="/media/photo/chhatrapati-shivaji-terminus-mid-day_240x180_81474349020.jpg" style="width:200px;height:200px">
+				</div>
+				<div class="caption">
+				<h3>&nbsp&nbspMehul Kothari</h3>
+				</div>
+				</div>
+				</div>
+
+				<div class="col-sm-6 col-md-4">
+				<div class="thumbnail">
+				<div class="item">
+				<img src="/media/photo/chhatrapati-shivaji-terminus-mid-day_240x180_81474349020.jpg" alt="Chania" style="width:200px;height:200px">
+				</div>
+				<div class="caption">
+				<h3>&nbsp&nbspAnish Hedaoo</h3>
+				</div>
+				</div>
+				</div>
+
+				<div class="col-sm-6 col-md-4">
+				<div class="thumbnail">
+				<div class="item">
+				<img src="/media/photo/chhatrapati-shivaji-terminus-mid-day_240x180_81474349020.jpg" alt="Chania" style="width:200px;height:200px">
+				</div>
+				<div class="caption">
+				<h3>Shaival Kacheria</h3>
+				</div>
+				</div>
+				</div>
+			</div>
+			</div>
+			</div>
+			</div>
+			</div>
+			</div>
+			<section>
+			</div>
+			</div>
+<!--<div class="mainHeader">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 clearfix">
+					<h1>About Us</h1>
+				</div>
+			</div>
+		</div>
+	</div><br>
+	<div id="about" class="container">
+		<div class="row">
+			<div class="col-xs-12">
+
+				<h3>Our background</h3>
+
+				<p>Building websites for several years has given us an appreciation for the time and effort it takes to create beautiful work. We also understand the value of using themes & templates to kickstart the design & development process.</p>
+
+				<p>We love Bootstrap. It's easy to learn, customize, and great for rapid development of responsive websites. Whether you're a seasoned developer/designer or someone learning the basics of web design and development, Bootstrap is great way to get started with all of its out-of-the-box components.</p>
+
+				<p>Bootstrap has come a long way and we wanted to create an amazing marketplace for Bootstrap enthusiasts like ourselves.</p>
+
+				<h3>Our Mission</h3>
+
+				<p>To be the #1 community for buyers & sellers of Bootstrap themes and templates.</p>
+
+				<h3>Our values</h3>
+
+				<p>When we started this marketplace, we wanted to place a high level of importance on three core values we felt were essential. These core values shape how we operate our company and how we make all of our decisions.</p>
+
+				<h4>Superior Quality</h4>
+
+				<p>All of our themes go through an extensive review process. Not only do we require a minimum design standard, but we also dig through the code of each theme to ensure that no errors are present. Rest assured that every theme listed on our marketplace is properly vetted by our team and worthy of being used in your next project.</p>
+
+				<h4>Outstanding Support</h4>
+
+				<p>We place a great deal of importance on offering outstanding customer support to ensure our marketplace runs smoothly.</p>
+
+				<h4>A Focus on Community</h4>
+
+				<p>Without our amazing community of buyers and sellers, this marketplace would not exist. Every feature we build and every decision we make is with the goal of improving our community and offering additional value to our members.</p>
+
+
+			</div>
+		</div>
+
+	</div>
+	<br>
+	<div class="footer_stats">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-3">
+										<span class="fact">236</span>
+					<div class="fact-name">Themes &amp; Templates</div>
+				</div>
+				<div class="col-xs-3">
+										<span class="fact">19,395</span>
+					<div class="fact-name">Members</div>
+				</div>
+				<div class="col-xs-3">
+										<span class="fact">10,007</span>
+					<div class="fact-name">Items Sold</div>
+				</div>
+				<div class="col-xs-3">
+										<span class="fact">101</span>
+					<div class="fact-name">Theme Authors</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer>
+		<div class="container footerWrap">
+			<div class="row">
+				<div class="col-xs-3">
+					<h4>BootstrapBay</h4>
+						<ul class="list-unstyled">
+							<li><a href="/sell">Sell Your Themes</a></li>
+							<li><a href="/affiliate">Affiliates</a></li>
+							<li><a href="/about">About Us</a></li>
+							<li><a href="/feed">RSS Feed</a></li>
+						</ul>
+				</div>
+				<div class="col-xs-3">
+					<h4>Help &amp; Support</h4>
+					<ul class="list-unstyled">
+						<li><a href="/faq">FAQ</a></li>
+						<li><a href="/submission-guidelines">Submission Guidelines</a></li>
+						<li><a href="/payment-rates">Payment Rates</a></li>
+						<li><a href="/contact-support">Contact &amp; Support</a></li>
+					</ul>
+				</div>
+				<div class="col-xs-3">
+					<h4>Resources</h4>
+					<ul class="list-unstyled">
+						<li><a href="/blog">Blog</a></li>
+						<li><a href="/blog/bootstrap-resources/">Resource List</a></li>
+						<li><a href="https://stocksnap.io" target="_blank">Free Stock Photos</a></li>
+						<li><a href="https://snappa.io" target="_blank">Graphic Design Tool</a></li>
+					</ul>
+				</div>
+				<div class="col-xs-3">
+					<h4>Legal</h4>
+					<ul class="list-unstyled">
+						<li><a href="/licenses">Licenses</a></li>
+						<li><a href="/terms">Terms &amp; Conditions</a></li>
+						<li><a href="/privacy">Privacy Policy</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="subFooter">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="pull-left">
+						&copy; 2016 BootstrapBay
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+</body>
+</html>
