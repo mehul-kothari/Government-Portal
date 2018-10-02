@@ -27,7 +27,7 @@ from forms import *
 from forms import PasswordResetRequestForm
 from government.settings import DEFAULT_FROM_EMAIL
 
-
+#notifications function. top 5.
 def notifs(user1):
     all_notif = Notifications.objects.filter(user_create=user1).filter(checked=False).order_by('created')
     all_notif1 = Notifications.objects.filter(user_create=user1).order_by('created')
@@ -50,7 +50,7 @@ def notifs(user1):
     else:
         notif4 = all_notif1[:count2]
     return notif4,count1
-
+#about us page
 def aboutus(request):
     context = RequestContext(request)
     return render_to_response('Login/abtus.html',{},context)
@@ -60,7 +60,7 @@ def simple(request):
     context = RequestContext(request)
 
     return render_to_response('Login/simplemap.html', context)
-
+#filter using area and locality
 def filters(request,area,loc,id):
     context = RequestContext(request)
     print(id)
